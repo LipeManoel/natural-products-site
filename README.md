@@ -1,43 +1,43 @@
-# 🌱 Natura Pura - Produtos Naturais
+# 🌱 Natura Pura - Natural Products
 
-Aplicação completa de e-commerce de produtos naturais com login, carrinho, favoritos e interface moderna.
-
----
-
-## ✨ Funcionalidades
-
-- ✅ Cadastro e Login (JWT)
-- ✅ Lista de produtos naturais
-- ✅ Adicionar/Remover dos Favoritos
-- ✅ Carrinho de compras completo (aumentar/diminuir quantidade)
-- ✅ Design bonito e responsivo (gradientes, animações, mobile-first)
-- ✅ Proteção de rotas com token
-- ✅ Pop-ups de feedback
+Complete e-commerce application for natural products with login, cart, favorites, and modern interface.
 
 ---
 
-## 🛠 Tecnologias
+## ✨ Features
+
+- ✅ Registration and Login (JWT)
+- ✅ Natural products listing
+- ✅ Add/Remove from Favorites
+- ✅ Complete shopping cart (increase/decrease quantity)
+- ✅ Beautiful and responsive design (gradients, animations, mobile-first)
+- ✅ Token-protected routes
+- ✅ Feedback pop-ups
+
+---
+
+## 🛠 Technologies
 
 **Frontend**
 - React 18 + Vite
 - React Router
-- Lucide React (ícones)
-- CSS Modules (arquivos `.css` externos)
+- Lucide React (icons)
+- CSS Modules (external `.css` files)
 
 **Backend**
 - Node.js + Express
 - MySQL2
-- JWT (autenticação)
-- bcryptjs (senhas)
+- JWT (authentication)
+- bcryptjs (passwords)
 
 ---
 
-## 🚀 Como Rodar o Projeto
+## 🚀 How to Run the Project
 
-### Pré-requisitos
+### Prerequisites
 - Node.js ≥ 18
-- MySQL instalado e rodando
-- Crie o banco `natural_products_db` e execute o `database/schema.sql`
+- MySQL installed and running
+- Create the `natural_products_db` database and run `database/schema.sql`
 
 ### 1. Backend
 ```bash
