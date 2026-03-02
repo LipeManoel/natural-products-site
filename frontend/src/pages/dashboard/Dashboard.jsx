@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import Products from "./Products";
-import Favorites from "./Favorites";
-import Cart from "./Cart";
-import Header from "./Header";
-import Footer from "./Footer";
+import { useState, useEffect } from "react";
+import Products from "../../components/Products";
+import Favorites from "../../components/Favorites";
+import Cart from "../../components/Cart";
+import Header from "../../components/common/header/Header";
+import Footer from "../../components/common/footer/Footer";
 
 export default function Dashboard({ token, logout }) {
   const [page, setPage] = useState("products");

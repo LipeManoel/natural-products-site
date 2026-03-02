@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, ShoppingCart, Trash2, Loader2 } from "lucide-react";
-
-import "@/index.css"
 
 export default function Favorites({ token }) {
   const [favorites, setFavorites] = useState([]);

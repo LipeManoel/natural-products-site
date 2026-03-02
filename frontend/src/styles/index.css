@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+:root {
+  --primary: #a0512d;
+  --primary-dark: #8a4426;
+  --primary-light: #cd863f;
+
+  --accent: #ecc134;
+
+  --text-dark: #4a2c1a;
+  --text-mid-light: #f5deb3e6;
+  --text-light: #fff8dc;
+
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-overlay: rgba(255, 255, 255, 0.08);
+  --bg2: linear-gradient(
+    135deg,
+    rgba(236, 193, 52, 0.71) 0%,
+    #a0512dff 50%,
+    #cd863fff 100%
+  );
+
+  --border-light: rgba(245, 222, 179, 0.3);
+
+  --shadow-soft:
+    0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(160, 81, 45, 0.1);
+}
+
+/* ===== Animações ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Pop-up ===== */
+.popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-light);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.popup.success {
+  background: linear-gradient(135deg, #48bb78, #2f855a);
+}
+
+.popup.error {
+  background: linear-gradient(135deg, #f56565, #c53030);
+}

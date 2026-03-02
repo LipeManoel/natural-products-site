@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Trash2, Plus, Minus, ShoppingCart } from "lucide-react";
-
-import "@/index.css"
 
 export default function Cart({ token }) {
   const [cart, setCart] = useState([]);

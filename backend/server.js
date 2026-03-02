@@ -176,4 +176,4 @@ app.get("/", (req, res) => {
   res.send("API rodando corretamente!");
 });
 
-app.listen(5000, () => console.log("Servidor rodando na porta 5000 🚀"));
+app.listen(5000, () => console.log("Servidor rodando na porta 5000"));

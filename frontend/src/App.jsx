@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
+import Login from "@/pages/auth/Login.jsx";
+import Register from "@/pages/auth/Register";
+import Dashboard from "@/pages/dashboard/Dashboard";
 
 export default function App() {
   const [token, setToken] = useState(null);

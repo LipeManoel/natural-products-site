@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
-
-import "@/index.css"
 
 export default function Products({ token }) {
   const [products, setProducts] = useState([]);

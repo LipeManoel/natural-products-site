@@ -1,0 +1,198 @@
+/* footer.css */
+
+/* ===== Footer principal ===== */
+.footer {
+  position: relative;
+  background: var(--bg2);
+}
+
+/* ===== Conteúdo ===== */
+footer .container {
+  padding: 4rem 2rem 2.5rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* ===== Seções ===== */
+.footer-section h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.footer-section h3::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--text-light);
+  border-radius: 1px;
+}
+
+.footer-section p {
+  color: var(--text-mid-light);
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+  width:fit-content;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.footer-section p:hover {
+  color: var(--text-light);
+  transform: translateX(4px);
+  cursor: pointer;
+}
+
+.footer-section a {
+  color: var(--text-mid-light);
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  width: fit-content;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  display: block;
+  margin-bottom: 0.75rem;
+  padding: 8px 0;
+  border-radius: 6px;
+}
+
+.footer-section a:hover {
+  color: var(--text-light);
+  transform: translateX(4px);
+}
+
+/* ===== Redes sociais ===== */
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: rgba(245, 222, 179, 0.9);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  text-decoration: none;
+}
+
+.footer-social-link:hover {
+  color: var(--text-light);
+  transform: scale(1.15);
+}
+
+/* ===== Rodapé inferior ===== */
+.footer-bottom {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(245, 222, 179, 0.2);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.footer-copyright {
+  color: var(--text-mid-light);
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.footer-brand {
+  color: var(--text-light);
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+  letter-spacing: -0.2px;
+}
+
+.footer-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.footer-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.footer-section:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.footer-bottom {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  .footer-content-wrapper {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-section a:hover {
+    transform: translateX(0) scale(1.02);
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content-wrapper {
+    padding: 2.5rem 1rem 1.5rem;
+  }
+
+  .footer-content {
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .footer-section p,
+  .footer-section a {
+    font-size: 0.85rem;
+  }
+
+  .footer-social-link {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-bottom {
+    padding: 1.5rem 0;
+  }
+}
