@@ -41,18 +41,6 @@ footer .container {
 
 .footer-section p {
   color: var(--text-mid-light);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  margin-bottom: 0.75rem;
-  font-weight: 400;
-  width:fit-content;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.footer-section p:hover {
-  color: var(--text-light);
-  transform: translateX(4px);
-  cursor: pointer;
 }
 
 .footer-section a {

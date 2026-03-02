@@ -11,7 +11,7 @@ export default function Footer() {
             <div className="footer-section">
               <h3>Natura Pura</h3>
               <p>Produtos 100% naturais para uma vida mais saudável e sustentável.</p>
-              <p className="footer-description">Qualidade garantida desde 2020.</p>
+              <p>Qualidade garantida desde 2020.</p>
             </div>
 
             <div className="footer-section">
@@ -24,9 +24,9 @@ export default function Footer() {
 
             <div className="footer-section">
               <h3>Contato</h3>
-              <p>contato@naturapura.com.br</p>
-              <p>(49) 99999-9999</p>
-              <p>Lages, Santa Catarina</p>
+              <a href="#">contato@naturapura.com.br</a>
+              <a href="#">(49) 99999-9999</a>
+              <a href="#">Lages, Santa Catarina</a>
               
               <div className="footer-social">
                 <a href="#" title="Facebook" className="footer-social-link">
