@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Products from "../../components/Products";
-import Favorites from "../../components/Favorites";
-import Cart from "../../components/Cart";
+import Products from "../../components/products/Products";
+import Favorites from "../../components/favorites/Favorites";
+import Cart from "../../components/cart/Cart";
 import Header from "../../components/common/header/Header";
 import Footer from "../../components/common/footer/Footer";
 

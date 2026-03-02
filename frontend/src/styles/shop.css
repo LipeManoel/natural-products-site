@@ -1,0 +1,344 @@
+/* shop.css */
+
+/* ====================== LAYOUT COMUM ====================== */
+.shop-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.shop-section {
+  background: linear-gradient(135deg, #f8f5e8 0%, #f0ede0 50%, #e8e3d3 100%);
+  min-height: 100vh;
+  padding: 3rem 2rem;
+}
+
+/* ====================== TÍTULO ====================== */
+.shop-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+.shop-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.shop-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(160, 82, 45, 0.7);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* ====================== GRID ====================== */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+/* ====================== CARD ====================== */
+.shop-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(160, 82, 45, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(160, 82, 45, 0.1);
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.shop-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(160, 82, 45, 0.2);
+  border-color: rgba(160, 82, 45, 0.4);
+}
+
+.shop-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: all 0.4s;
+  filter: brightness(1.05) saturate(1.1);
+}
+
+.shop-card:hover .shop-image {
+  transform: scale(1.1);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+.shop-content {
+  padding: 2rem 1.5rem;
+}
+
+.shop-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+  text-transform: capitalize;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.shop-description {
+  color: rgba(160, 82, 45, 0.7);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.shop-price {
+  color: var(--primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.shop-price::before {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(135deg, var(--accent), #d2b48c);
+  border-radius: 1px;
+}
+
+/* ====================== BOTÕES ====================== */
+.shop-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.shop-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.shop-btn-favorite {
+  background: linear-gradient(135deg, #ecc134 0%, #d4ac0d 100%);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.shop-btn-favorite:hover {
+  background: linear-gradient(135deg, #d4ac0d 0%, #b7950b 100%);
+  transform: translateY(-2px);
+}
+
+.shop-btn-cart {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.shop-btn-cart:hover {
+  background: linear-gradient(135deg, var(--primary-dark), #654321);
+  transform: translateY(-2px);
+}
+
+.shop-btn-remove {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.shop-btn-remove:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  transform: translateY(-2px);
+}
+
+/* ====================== INDICADORES ====================== */
+.favorited-indicator,
+.favorite-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #ecc134 0%, #d4ac0d 100%);
+  color: #fff;
+  padding: 0.6rem 0.7rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(236, 193, 52, 0.4);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ====================== QUANTIDADE (Carrinho) ====================== */
+.shop-quantity-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(160,82,45,0.15);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.shop-quantity-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: var(--primary);
+  font-size: 0.95rem;
+}
+
+.shop-quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.shop-quantity-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(160,82,45,0.3);
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,248,220,0.8));
+  color: var(--primary);
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.shop-quantity-btn:hover {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.shop-quantity-display {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.1rem;
+  min-width: 28px;
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(255,255,255,0.8);
+  border-radius: 10px;
+  border: 1px solid rgba(160,82,45,0.2);
+}
+
+/* ====================== TOTAL (Carrinho) ====================== */
+.shop-total {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,248,220,0.9) 100%);
+  border: 1px solid rgba(160,82,45,0.2);
+  border-radius: 25px;
+  padding: 3rem 2rem;
+  box-shadow: 0 15px 40px rgba(160,82,45,0.15);
+  text-align: center;
+  margin-top: 3rem;
+  backdrop-filter: blur(15px);
+}
+
+.shop-total-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.3px;
+}
+
+.shop-total-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 2rem;
+}
+
+.shop-checkout-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  padding: 1.25rem 2.5rem;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0 auto;
+  transition: all 0.3s;
+}
+
+.shop-checkout-btn:hover {
+  background: linear-gradient(135deg, var(--primary-dark), #654321);
+  transform: translateY(-3px);
+}
+
+/* ====================== ANIMAÇÃO ====================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ====================== RESPONSIVO ====================== */
+@media (max-width: 768px) {
+  .shop-container,
+  .shop-section {
+    padding: 2rem 1rem;
+  }
+  .shop-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
