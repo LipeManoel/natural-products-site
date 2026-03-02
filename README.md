@@ -32,56 +32,6 @@ Aplicação completa de e-commerce de produtos naturais com login, carrinho, fav
 
 ---
 
-## 📁 Estrutura de Pastas (Frontend)
-NATURAL-PRODUCTS-SITE/
-├── backend/
-│   ├── node_modules/
-│   ├── package.json
-│   ├── package-lock.json
-│   └── server.js               ← API completa (Express + MySQL + JWT)
-├── database/
-│   └── schema.sql              ← Script de criação das tabelas
-├── frontend/
-│   ├── node_modules/
-│   ├── public/
-│   │   └── images/
-│   │       ├── products/       ← Imagens dos produtos (jpg/png)
-│   │       └── logo.png
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── cart/
-│   │   │   │   └── Cart.jsx
-│   │   │   ├── common/
-│   │   │   │   ├── Footer.jsx
-│   │   │   │   └── footer.css
-│   │   │   ├── header/
-│   │   │   │   ├── Header.jsx
-│   │   │   │   └── header.css
-│   │   │   ├── favorites/
-│   │   │   │   └── Favorites.jsx
-│   │   │   └── products/
-│   │   │       └── Products.jsx
-│   │   ├── pages/
-│   │   │   └── auth/
-│   │   │       ├── Login.jsx
-│   │   │       ├── Register.jsx
-│   │   │       └── auth.css
-│   │   ├── dashboard/
-│   │   │   └── Dashboard.jsx     ← Página principal após login
-│   │   ├── styles/
-│   │   │   ├── index.css
-│   │   │   └── shop.css          ← Estilos compartilhados (produtos/carrinho/favoritos)
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── index.html
-│   ├── package.json
-│   ├── tailwind.config.js
-│   ├── vite.config.js
-│   └── .gitignore
-└── README.md
-
----
-
 ## 🚀 Como Rodar o Projeto
 
 ### Pré-requisitos
