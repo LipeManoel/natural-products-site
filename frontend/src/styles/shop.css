@@ -1,16 +1,12 @@
 /* shop.css */
 
 /* ====================== LAYOUT COMUM ====================== */
-.shop-container {
-  max-width: 1280px;
-  margin: 0 auto;
+.shop .container {
   padding: 3rem 2rem;
 }
 
-.shop-section {
-  background: linear-gradient(135deg, #f8f5e8 0%, #f0ede0 50%, #e8e3d3 100%);
-  min-height: 100vh;
-  padding: 3rem 2rem;
+.shop {
+  background: var(--bg1);
 }
 
 /* ====================== TÍTULO ====================== */
@@ -51,9 +47,10 @@
 /* ====================== GRID ====================== */
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 0.375fr));
   gap: 2.5rem;
   margin-bottom: 2rem;
+  justify-content: center;
 }
 
 /* ====================== CARD ====================== */
@@ -119,18 +116,6 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  position: relative;
-}
-
-.shop-price::before {
-  content: '';
-  position: absolute;
-  bottom: -0.5rem;
-  left: 0;
-  width: 50px;
-  height: 2px;
-  background: linear-gradient(135deg, var(--accent), #d2b48c);
-  border-radius: 1px;
 }
 
 /* ====================== BOTÕES ====================== */
@@ -323,12 +308,6 @@
 .shop-checkout-btn:hover {
   background: linear-gradient(135deg, var(--primary-dark), #654321);
   transform: translateY(-3px);
-}
-
-/* ====================== ANIMAÇÃO ====================== */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ====================== RESPONSIVO ====================== */

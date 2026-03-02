@@ -89,8 +89,8 @@ export default function Favorites({ token }) {
       {popup.visible && (
         <div className={`popup ${popup.type} visible`}>{popup.text}</div>
       )}
-      <div className="shop-section">
-        <div className="shop-container">
+      <section className="shop">
+        <div className="container">
           <h2 className="shop-title">Meus Favoritos</h2>
           <p className="shop-subtitle">Produtos que você adorou</p>
 
@@ -134,7 +134,7 @@ export default function Favorites({ token }) {
             </div>
           )}
         </div>
-      </div>
+      </section>
     </>
   );
 }

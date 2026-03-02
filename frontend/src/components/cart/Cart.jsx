@@ -99,8 +99,8 @@ export default function Cart({ token }) {
       {popup.visible && (
         <div className={`popup ${popup.type} visible`}>{popup.text}</div>
       )}
-      <div className="shop-section">
-        <div className="shop-container">
+      <section className="shop">
+        <div className="container">
           <h2 className="shop-title">Meu Carrinho</h2>
           <p className="shop-subtitle">Seus produtos selecionados</p>
 
@@ -174,7 +174,7 @@ export default function Cart({ token }) {
             </>
           )}
         </div>
-      </div>
+      </section>
     </>
   );
 }

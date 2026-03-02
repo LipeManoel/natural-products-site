@@ -80,8 +80,8 @@ export default function Products({ token }) {
         <span className="popup-text">{popup.text}</span>
       </div>
 
-      <div className="shop-section">
-        <div className="shop-container">
+      <section className="shop">
+        <div className="container">
           <h2 className="shop-title">Produtos</h2>
           <p className="shop-subtitle">Descubra nossos produtos naturais</p>
 
@@ -127,7 +127,7 @@ export default function Products({ token }) {
             })}
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

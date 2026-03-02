@@ -23,17 +23,12 @@ body {
 
   --bg-card: rgba(255, 255, 255, 0.95);
   --bg-overlay: rgba(255, 255, 255, 0.08);
-  --bg2: linear-gradient(
-    135deg,
-    rgba(236, 193, 52, 0.71) 0%,
-    #a0512dff 50%,
-    #cd863fff 100%
-  );
+  --bg1: linear-gradient(135deg, #f8f5e8 0%, #f0ede0 50%, #e8e3d3 100%);
+  --bg2: linear-gradient(135deg, #ecc134b5 0%,#a0512dff 50%,#cd863fff 100%);
 
   --border-light: rgba(245, 222, 179, 0.3);
 
-  --shadow-soft:
-    0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(160, 81, 45, 0.1);
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(160, 81, 45, 0.1);
 }
 
 /* ===== Animações ===== */
@@ -56,7 +51,7 @@ body {
   transform: translateX(-50%) translateY(-20px);
   padding: 1rem 1.5rem;
   border-radius: 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 1rem;
   color: var(--text-light);
@@ -65,7 +60,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   transition: all 0.4s ease;
   z-index: 9999;
 }

@@ -33,7 +33,6 @@ export default function Header({ onNavigation, logout }) {
       onNavigation(section);
     }
 
-    // Rolagem suave com compensação do header
     const target = document.querySelector(section);
     if (target) {
       const headerOffset = 120;

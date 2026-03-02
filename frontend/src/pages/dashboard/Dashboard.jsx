@@ -12,7 +12,6 @@ export default function Dashboard({ token, logout }) {
   const handleHeaderNavigation = (section) => {
     setTargetSection(section);
     
-    // Mapeia as seções para as páginas correspondentes
     const sectionToPage = {
       '#produtos': 'products',
       '#salvos': 'favorites',
