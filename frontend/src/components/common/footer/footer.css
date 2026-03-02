@@ -41,7 +41,6 @@ footer .container {
 
 .footer-section p {
   color: var(--text-mid-light);
-  font-family: "Inter", sans-serif;
   font-size: 0.9rem;
   line-height: 1.7;
   margin-bottom: 0.75rem;
@@ -58,7 +57,6 @@ footer .container {
 
 .footer-section a {
   color: var(--text-mid-light);
-  font-family: "Inter", sans-serif;
   font-size: 0.9rem;
   line-height: 1.6;
   width: fit-content;
@@ -109,7 +107,6 @@ footer .container {
 
 .footer-copyright {
   color: var(--text-mid-light);
-  font-family: "Inter", sans-serif;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
   font-weight: 400;

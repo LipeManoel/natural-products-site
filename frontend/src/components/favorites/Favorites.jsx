@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Heart, ShoppingCart, Trash2, Loader2 } from "lucide-react";
 import "@/styles/shop.css";
+import { CgSearchLoading } from "react-icons/cg";
 
 export default function Favorites({ token }) {
   const [favorites, setFavorites] = useState([]);
@@ -95,7 +96,8 @@ export default function Favorites({ token }) {
           <p className="shop-subtitle">Produtos que você adorou</p>
 
           {favorites.length === 0 ? (
-            <div style={{ textAlign: "center", color: "rgba(160,82,45,0.7)" }}>
+            <div className="shop-nothing">
+              <CgSearchLoading classname ="nothing-icon"/>
               Nenhum favorito ainda.
             </div>
           ) : (

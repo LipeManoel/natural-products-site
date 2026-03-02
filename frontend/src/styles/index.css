@@ -29,6 +29,10 @@ body {
   --border-light: rgba(245, 222, 179, 0.3);
 
   --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(160, 81, 45, 0.1);
+
+  color: var(--primary);
+  font-size: medium;
+  font-family: "Inter", sans-serif;
 }
 
 /* ===== Animações ===== */
@@ -51,7 +55,6 @@ body {
   transform: translateX(-50%) translateY(-20px);
   padding: 1rem 1.5rem;
   border-radius: 12px;
-  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 1rem;
   color: var(--text-light);

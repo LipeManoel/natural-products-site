@@ -105,7 +105,7 @@ export default function Cart({ token }) {
           <p className="shop-subtitle">Seus produtos selecionados</p>
 
           {cart.length === 0 ? (
-            <div style={{ textAlign: "center", color: "rgba(160,82,45,0.7)" }}>
+            <div className="shop-nothing">
               Seu carrinho está vazio.
             </div>
           ) : (
