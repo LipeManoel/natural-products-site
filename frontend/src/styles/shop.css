@@ -12,15 +12,21 @@
 .shop-nothing {
   min-height: 30dvh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   position: relative;
 }
 
+.shop-nothing p {
+  z-index: 2;
+}
+
 .nothing-icon{
   position: absolute;
-  font-size: fit-content;
+  z-index: 1;
+  color: var(--text-mid-light);
+  font-size: min(320px, 24vw);
 }
 
 /* ====================== TÍTULO ====================== */

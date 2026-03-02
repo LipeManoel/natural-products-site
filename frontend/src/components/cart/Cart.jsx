@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Trash2, Plus, Minus, ShoppingCart } from "lucide-react";
 import "@/styles/shop.css";
+import { CgSearchLoading } from "react-icons/cg";
 
 export default function Cart({ token }) {
   const [cart, setCart] = useState([]);
@@ -106,7 +107,8 @@ export default function Cart({ token }) {
 
           {cart.length === 0 ? (
             <div className="shop-nothing">
-              Seu carrinho está vazio.
+              <CgSearchLoading className ="nothing-icon"/>
+              <p>Seu carrinho está vazio.</p>
             </div>
           ) : (
             <>

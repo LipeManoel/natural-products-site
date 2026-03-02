@@ -97,8 +97,8 @@ export default function Favorites({ token }) {
 
           {favorites.length === 0 ? (
             <div className="shop-nothing">
-              <CgSearchLoading classname ="nothing-icon"/>
-              Nenhum favorito ainda.
+              <CgSearchLoading className ="nothing-icon"/>
+              <p>Nenhum favorito ainda.</p>
             </div>
           ) : (
             <div className="shop-grid">
