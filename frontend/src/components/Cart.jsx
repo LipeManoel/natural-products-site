@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Trash2, Plus, Minus, ShoppingCart } from "lucide-react";
 
+import "@/index.css"
+
 export default function Cart({ token }) {
   const [cart, setCart] = useState([]);
   const [popup, setPopup] = useState({ text: "", type: "", visible: false }); // pop-up

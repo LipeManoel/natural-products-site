@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Heart, ShoppingCart, Trash2, Loader2 } from "lucide-react";
 
+import "@/index.css"
+
 export default function Favorites({ token }) {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -67,7 +69,7 @@ export default function Favorites({ token }) {
     return (
       <>
         <style jsx>{`
-          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+          
 
           .favorites-loading {
             max-width: 1280px;

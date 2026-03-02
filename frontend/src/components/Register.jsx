@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import "@/index.css"
+
 export default function Register({ setPage }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -83,7 +85,7 @@ export default function Register({ setPage }) {
       </div>
 
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
 
         .register-section {
           min-height: 100vh;

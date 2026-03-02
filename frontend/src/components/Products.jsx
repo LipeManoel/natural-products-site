@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
 
+import "@/index.css"
+
 export default function Products({ token }) {
   const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
@@ -121,7 +123,7 @@ export default function Products({ token }) {
       </div>
 
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
 
         .products-section { 
           background: linear-gradient(135deg, #f8f5e8 0%, #f0ede0 50%, #e8e3d3 100%);

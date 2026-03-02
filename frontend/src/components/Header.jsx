@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { LogOut, ShoppingCart, Heart } from "lucide-react";
 
+import "@/index.css"
+
 export default function Header({ onNavigation, logout }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,7 +47,7 @@ export default function Header({ onNavigation, logout }) {
   return (
     <>
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
 
         .header {
           position: sticky;
