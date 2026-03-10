@@ -25,54 +25,45 @@ export default function Dashboard({ token, logout }) {
 
   useEffect(() => {
     if (targetSection) {
-      if (targetSection === '#rodape') {
-        const element = document.querySelector(targetSection);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-        return;
-      }
-
       const element = document.querySelector(targetSection);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const headerOffset = 120;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       }
     }
-  }, [page, targetSection]);
+  }, [targetSection]);
 
   return (
-    
-    <div className="flex flex-col min-h-screen" >
-      {/* Header */}
-      <section id="cabecalho" className="header">
+    <div className="flex flex-col min-h-screen">
+      <header id="cabecalho" className="header">
         <Header onNavigation={handleHeaderNavigation} logout={logout} />
-      </section>
+      </header>
 
-      {/* Conteúdo principal */}
+      <main id="conteudo-principal" tabIndex="-1">
         {page === "products" && (
-          <section id="produtos" className="products-section">
+          <section id="produtos" aria-labelledby="produtos-heading">
             <Products token={token} />
           </section>
         )}
 
         {page === "favorites" && (
-          <section id="salvos" className="favorites-section">
+          <section id="salvos" aria-labelledby="favoritos-heading">
             <Favorites token={token} />
           </section>
         )}
 
         {page === "cart" && (
-          <section id="carrinho" className="cart-section">
+          <section id="carrinho" aria-labelledby="carrinho-heading">
             <Cart token={token} />
           </section>
         )}
+      </main>
 
-        <section id="rodape" className="footer">
-          <Footer token={token} />
-        </section>
-
-      {/* Login e Registro */}
-      
+      <footer id="rodape" className="footer">
+        <Footer />
+      </footer>
     </div>
   );
 }

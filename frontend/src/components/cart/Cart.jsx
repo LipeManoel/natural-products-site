@@ -26,70 +26,43 @@ export default function Cart({ token }) {
     }
   };
 
-  // ==================== REMOVER ====================
   const removeFromCart = async (cartId) => {
     try {
       const res = await fetch(`http://localhost:5000/api/cart/${cartId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      if (!res.ok) throw new Error("Erro ao remover item");
-
+      if (!res.ok) throw new Error("Erro ao remover");
       setCart((prev) => prev.filter((item) => item.cart_id !== cartId));
       showPopup("Item removido do carrinho!", "success");
     } catch (err) {
-      console.error(err);
       showPopup("Erro ao remover item.", "error");
     }
   };
 
-  // ==================== AUMENTAR / DIMINUIR ====================
   const changeQuantity = async (cartId, currentQuantity, change) => {
     const newQuantity = currentQuantity + change;
-
-    if (newQuantity <= 0) {
-      await removeFromCart(cartId);
-      return;
-    }
+    if (newQuantity <= 0) return removeFromCart(cartId);
 
     try {
-      // 1. Remove o item atual
+      // Lógica simplificada (ajuste conforme seu backend real)
       await fetch(`http://localhost:5000/api/cart/${cartId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      // 2. Re-insere com a nova quantidade (o backend soma automaticamente se já existir)
-      const productId = cart.find((item) => item.cart_id === cartId)?.id; // pega o product_id
-
-      await fetch("http://localhost:5000/api/cart", {
-        method: "POST",
+        method: "PATCH", // se seu backend suportar PATCH, senão use DELETE + POST
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ productId, quantity: newQuantity }),
+        body: JSON.stringify({ quantity: newQuantity }),
       });
-
-      // Atualiza a tela
       await fetchCart();
-
-      showPopup(
-        change > 0 ? "Quantidade aumentada!" : "Quantidade diminuída!",
-        "success",
-      );
+      showPopup(change > 0 ? "Quantidade aumentada!" : "Quantidade diminuída!", "success");
     } catch (err) {
-      console.error(err);
       showPopup("Erro ao alterar quantidade.", "error");
-      await fetchCart(); // recarrega caso dê erro parcial
     }
   };
 
   const getTotalPrice = () =>
-    cart
-      .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2);
+    cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
 
   useEffect(() => {
     fetchCart();
@@ -98,26 +71,33 @@ export default function Cart({ token }) {
   return (
     <>
       {popup.visible && (
-        <div className={`popup ${popup.type} visible`}>{popup.text}</div>
+        <div
+          className={`popup ${popup.type} visible`}
+          role="alert"
+          aria-live="assertive"
+        >
+          {popup.text}
+        </div>
       )}
-      <section className="shop">
+
+      <section className="shop" aria-labelledby="carrinho-heading">
         <div className="container">
-          <h2 className="shop-title">Meu Carrinho</h2>
+          <h2 id="carrinho-heading" className="shop-title">Meu Carrinho</h2>
           <p className="shop-subtitle">Seus produtos selecionados</p>
 
           {cart.length === 0 ? (
             <div className="shop-nothing">
-              <CgSearchLoading className ="nothing-icon"/>
+              <CgSearchLoading className="nothing-icon" aria-hidden="true" />
               <p>Seu carrinho está vazio.</p>
             </div>
           ) : (
             <>
-              <div className="shop-grid">
+              <div className="shop-grid" role="list">
                 {cart.map((c) => (
-                  <div key={c.cart_id} className="shop-card">
+                  <article key={c.cart_id} className="shop-card" role="group">
                     <img
                       src={`/images/products/${c.image}`}
-                      alt={c.name}
+                      alt={`Produto ${c.name} - ${c.description}`}
                       className="shop-image"
                     />
                     <div className="shop-content">
@@ -129,48 +109,48 @@ export default function Cart({ token }) {
                         <div className="shop-quantity-controls">
                           <button
                             className="shop-quantity-btn"
-                            onClick={() =>
-                              changeQuantity(c.cart_id, c.quantity, -1)
-                            }
+                            onClick={() => changeQuantity(c.cart_id, c.quantity, -1)}
+                            aria-label="Diminuir quantidade"
                           >
-                            <Minus size={16} />
+                            <Minus size={16} aria-hidden="true" />
                           </button>
-                          <span className="shop-quantity-display">
+                          <span className="shop-quantity-display" aria-live="polite">
                             {c.quantity}
                           </span>
                           <button
                             className="shop-quantity-btn"
-                            onClick={() =>
-                              changeQuantity(c.cart_id, c.quantity, +1)
-                            }
+                            onClick={() => changeQuantity(c.cart_id, c.quantity, 1)}
+                            aria-label="Aumentar quantidade"
                           >
-                            <Plus size={16} />
+                            <Plus size={16} aria-hidden="true" />
                           </button>
                         </div>
                       </div>
 
-                      <p className="shop-price">
-                        R$ {(c.price * c.quantity).toFixed(2)}
-                      </p>
+                      <p className="shop-price">R$ {(c.price * c.quantity).toFixed(2)}</p>
 
                       <div className="shop-buttons">
                         <button
                           onClick={() => removeFromCart(c.cart_id)}
                           className="shop-btn shop-btn-remove"
+                          aria-label={`Remover ${c.name} do carrinho`}
                         >
-                          <Trash2 size={16} /> Remover
+                          <Trash2 size={16} aria-hidden="true" /> Remover
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
 
-              <div className="shop-total">
+              <div className="shop-total" role="region" aria-live="polite">
                 <h3 className="shop-total-title">Total do Pedido</h3>
                 <p className="shop-total-price">R$ {getTotalPrice()}</p>
-                <button className="shop-checkout-btn shop-btn">
-                  <ShoppingCart size={18} /> Finalizar Compra
+                <button
+                  className="shop-checkout-btn shop-btn"
+                  aria-label={`Finalizar compra no valor de R$ ${getTotalPrice()}`}
+                >
+                  <ShoppingCart size={18} aria-hidden="true" /> Finalizar Compra
                 </button>
               </div>
             </>
