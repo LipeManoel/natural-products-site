@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Login from "@/pages/auth/Login.jsx";
 import Register from "@/pages/auth/Register";
 import Dashboard from "@/pages/dashboard/Dashboard";
+import AccessibilityToolbar from "@/components/common/accessibility-toolbar/AccessibilityToolbar";
+
 import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation"; // novo
 
 export default function App() {
@@ -17,11 +19,22 @@ export default function App() {
 
   if (!token) {
     return page === "login" ? (
-      <Login setPage={setPage} setToken={setToken} />
+      <>
+        <AccessibilityToolbar />
+        <Login setPage={setPage} setToken={setToken} />
+      </>
     ) : (
-      <Register setPage={setPage} />
+      <>
+        <AccessibilityToolbar />
+        <Register setPage={setPage} />
+      </>
     );
   }
 
-  return <Dashboard token={token} logout={logout} />;
+  return (
+    <>
+      <AccessibilityToolbar />
+      <Dashboard token={token} logout={logout} />
+    </>
+  );
 }

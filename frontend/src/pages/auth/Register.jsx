@@ -1,36 +1,38 @@
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
-import "./auth.css"
+import "./auth.css";
 
 export default function Register({ setPage }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [popup, setPopup] = useState({ text: "", type: "", visible: false });
 
-  const handleRegister = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        showPopup("Registro realizado com sucesso! Faça login.", "success");
-        setTimeout(() => setPage("login"), 1500);
-      } else {
-        showPopup(data.error || "Usuário já existe ou erro no registro.", "error");
-      }
-    } catch (err) {
-      showPopup("Ocorreu um erro. Tente novamente mais tarde.", "error");
-    }
-  };
+  const { register, loading, error } = useAuth();
 
   const showPopup = (text, type) => {
     setPopup({ text, type, visible: true });
-    setTimeout(() => setPopup(prev => ({ ...prev, visible: false })), 3000);
+    setTimeout(() => setPopup((prev) => ({ ...prev, visible: false })), 3000);
+  };
+
+  const handleRegister = async () => {
+    if (!username.trim()) {
+      showPopup("O usuário não pode estar vazio", "error");
+      return;
+    }
+
+    if (password.length < 6) {
+      showPopup("A senha deve ter pelo menos 6 caracteres", "error");
+      return;
+    }
+
+    try {
+      await register(username, password);
+      showPopup("Registro realizado com sucesso! Faça login.", "success");
+      setTimeout(() => setPage("login"), 1800);
+    } catch (err) {
+      showPopup(error || "Usuário já existe ou erro no servidor", "error");
+    }
   };
 
   return (
@@ -56,8 +58,10 @@ export default function Register({ setPage }) {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="auth-input"
+                  disabled={loading}
                 />
               </div>
+
               <div className="input-group">
                 <input
                   type="password"
@@ -65,11 +69,20 @@ export default function Register({ setPage }) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="auth-input"
+                  disabled={loading}
                 />
               </div>
-              <button onClick={handleRegister} className="auth-button">
-                Registrar
+
+              <button
+                onClick={handleRegister}
+                className="auth-button"
+                disabled={loading}
+              >
+                {loading ? "Registrando..." : "Registrar"}
               </button>
+
+              {/* Mostra erro do hook, se houver */}
+              {error && <p className="error-message">{error}</p>}
             </div>
 
             <div className="auth-footer">

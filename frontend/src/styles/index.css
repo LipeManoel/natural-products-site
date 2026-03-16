@@ -1,8 +1,60 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.cdnfonts.com/css/open-dyslexic");
+
+:root {
+  --accent: #a0512dff;
+  --accent-hover: #63321b; 
+
+  --dark: #292727;
+  --mid-light: #666;
+  --light-soft:#dbdbdb;
+  --light: #ffffff;
+
+  --bg1:#ffffff;
+  --bg2: linear-gradient(135deg, #ecc134b5 0%, #a0512dff 50%, #cd863fff 100%);
+
+  --text-scale: 1;
+  --line-spacing: 1.5;
+
+  --letter-spacing: 0px;
+
+  --default-font-body: "Inter", sans-serif;
+  --default-font-heading: "Playfair Display", serif;
+}
+
+html {
+  font-size: calc(16px * var(--text-scale));
+}
 
 body {
   margin: 0;
   padding: 0;
+  color: var(--dark);
+  font-family: var(--default-font-body);
+  line-height: var(--line-spacing);
+  letter-spacing: var(--letter-spacing);
+  background: var(--bg1);
+}
+
+h1, h2, h3 {
+  font-family: var(--default-font-heading);
+}
+
+h4, h5, h6 {
+  font-family: var(--default-font-body);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  line-height: 1.3;
 }
 
 .container {
@@ -10,46 +62,177 @@ body {
   margin: 0 auto;
 }
 
-:root {
-  --primary: #a0512d;
-  --primary-dark: #8a4426;
-  --primary-light: #cd863f;
+/* =========================
+   FONTES
+========================= */
+html.font-default body,
+html.font-default p,
+html.font-default span,
+html.font-default li,
+html.font-default a,
+html.font-default button,
+html.font-default input,
+html.font-default textarea,
+html.font-default select {
+  font-family: "Inter", sans-serif !important;
+}
 
-  --accent: #ecc134;
+html.font-default h1,
+html.font-default h2,
+html.font-default h3,
+html.font-default h4,
+html.font-default h5,
+html.font-default h6 {
+  font-family: "Playfair Display", serif !important;
+}
 
-  --text-dark: #4a2c1a;
-  --text-mid-light: #f5deb3e6;
-  --text-light: #fff8dc;
+html.font-opendyslexic body,
+html.font-opendyslexic p,
+html.font-opendyslexic span,
+html.font-opendyslexic li,
+html.font-opendyslexic a,
+html.font-opendyslexic button,
+html.font-opendyslexic input,
+html.font-opendyslexic textarea,
+html.font-opendyslexic select,
+html.font-opendyslexic h1,
+html.font-opendyslexic h2,
+html.font-opendyslexic h3,
+html.font-opendyslexic h4,
+html.font-opendyslexic h5,
+html.font-opendyslexic h6 {
+  font-family: "OpenDyslexic", sans-serif !important;
+}
 
-  --bg-card: rgba(255, 255, 255, 0.95);
-  --bg-overlay: rgba(255, 255, 255, 0.08);
-  --bg1: linear-gradient(135deg, #f8f5e8 0%, #f0ede0 50%, #e8e3d3 100%);
-  --bg2: linear-gradient(135deg, #ecc134b5 0%,#a0512dff 50%,#cd863fff 100%);
+html.font-arial body,
+html.font-arial p,
+html.font-arial span,
+html.font-arial li,
+html.font-arial a,
+html.font-arial button,
+html.font-arial input,
+html.font-arial textarea,
+html.font-arial select,
+html.font-arial h1,
+html.font-arial h2,
+html.font-arial h3,
+html.font-arial h4,
+html.font-arial h5,
+html.font-arial h6 {
+  font-family: Arial, sans-serif !important;
+}
 
-  --border-light: rgba(245, 222, 179, 0.3);
+html.font-verdana body,
+html.font-verdana p,
+html.font-verdana span,
+html.font-verdana li,
+html.font-verdana a,
+html.font-verdana button,
+html.font-verdana input,
+html.font-verdana textarea,
+html.font-verdana select,
+html.font-verdana h1,
+html.font-verdana h2,
+html.font-verdana h3,
+html.font-verdana h4,
+html.font-verdana h5,
+html.font-verdana h6 {
+  font-family: Verdana, sans-serif !important;
+}
 
-  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(160, 81, 45, 0.1);
+/* =========================
+   TEMAS / CONTRASTE
+   usando apenas variáveis existentes
+========================= */
 
-  color: var(--primary);
-  font-size: medium;
-  font-family: "Inter", sans-serif;
+/* Escuro */
+html.contrast-dark {
+  --accent: rgb(255, 255, 255);
+  --accent-hover: rgb(143, 143, 143);
 
-  h1, h2{
-    font-family: 'Playfair Display', serif;
+  --dark: #ffffff;
+  --mid-light: rgb(161, 161, 161);
+  --light-soft: #8d8c8c;
+  --light: #868686;
+
+  --bg1: #000000;
+  --bg2: #000000;
+}
+
+/* Claro */
+html.contrast-light {
+  --accent: var(--mid-light);
+  --accent-hover: var(--dark);
+
+  --dark: #000000;
+  --mid-light: #4b4b4b;
+  --light-soft: #bebebe;
+  --light: #ffffff;
+
+  --bg1: #ffffff;
+  --bg2: var(--dark);
+}
+
+/* Amarelo com preto */
+html.contrast-yellow-black {
+  --accent: #ffeb3b;
+  --accent-hover: #8d7f00;
+
+  --dark: #ffeb3b;
+  --mid-light: #fff59d;
+  --light-soft: #858500;
+  --light: rgb(100, 100, 45);
+
+  --bg1: #000000;
+  --bg2: #000000;
+}
+
+/* Azul com amarelo */
+html.contrast-blue-yellow {
+  --accent: #ffe600;
+  --accent-hover: #fff176;
+
+  --dark: #ffeb3b;
+  --mid-light: #a89d39;
+  --light-soft: #867c22;
+  --light: #a19526;
+
+  --bg1: #072c57;
+  --bg2: #051c36;
+}
+
+/* Máscara */
+body.reading-mask-active::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.5) 42%,
+    rgba(255, 255, 255, 0) 47%,
+    rgba(255, 255, 255, 0) 53%,
+    rgba(0, 0, 0, 0.5) 58%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  pointer-events: none;
+  z-index: 9997;
+}
+
+body.magnifier-full {
+  zoom: 1.5;
+}
+
+@supports not (zoom: 1.5) {
+  body.magnifier-full {
+    transform: scale(1.5);
+    transform-origin: top left;
+    width: calc(100% / 1.5);
   }
+}
 
-  h2{
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-
-  h3{
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: capitalize;
-    line-height: 1.3;
-  }
+body.magnifier-section {
+  cursor: row-resize;
 }
 
 /* ===== Animações ===== */
@@ -92,9 +275,11 @@ body {
 }
 
 .popup.success {
-  background: linear-gradient(135deg, #48bb78, #2f855a);
+  color: var(--light);
+  background: var(--accent);
 }
 
 .popup.error {
-  background: linear-gradient(135deg, #f56565, #c53030);
+  color: var(--light);
+  background: var(--accent);
 }

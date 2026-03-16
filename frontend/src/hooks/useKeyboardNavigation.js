@@ -3,12 +3,10 @@ import { useEffect } from 'react';
 export function useKeyboardNavigation() {
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Ignora se o foco está em campos de entrada
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) || e.target.isContentEditable) {
         return;
       }
 
-      // Atalho: Alt + H / Alt + T (evita conflito com leitores de tela)
       if (e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
         const key = e.key.toUpperCase();
 
@@ -40,7 +38,7 @@ export function useKeyboardNavigation() {
 
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      target.tabIndex = -1; // permite foco temporário
+      target.tabIndex = -1;
       target.focus();
     }
   };

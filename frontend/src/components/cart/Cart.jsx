@@ -1,72 +1,94 @@
 import { useEffect, useState } from "react";
 import { Trash2, Plus, Minus, ShoppingCart } from "lucide-react";
-import "@/styles/shop.css";
 import { CgSearchLoading } from "react-icons/cg";
+import { useShopActions } from "@/hooks/useShopActions";
+
+import "@/styles/shop.css";
 
 export default function Cart({ token }) {
   const [cart, setCart] = useState([]);
   const [popup, setPopup] = useState({ text: "", type: "", visible: false });
 
-  const showPopup = (text, type = "success") => {
+  const {
+    fetchCart,
+    removeFromCart,
+    addToCart,
+    loading,
+    error,
+  } = useShopActions(token);
+
+   const showPopup = (text, type) => {
     setPopup({ text, type, visible: true });
-    setTimeout(() => setPopup({ text: "", type, visible: false }), 3000);
+    setTimeout(() => setPopup((prev) => ({ ...prev, visible: false })), 3000);
   };
 
-  const fetchCart = async () => {
-    if (!token) return;
-    try {
-      const res = await fetch("http://localhost:5000/api/cart", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
-      setCart(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error(err);
-      showPopup("Erro ao carregar o carrinho.", "error");
+  useEffect(() => {
+    if (!token) {
+      showPopup("Faça login para ver o carrinho", "error");
+      return;
     }
-  };
 
-  const removeFromCart = async (cartId) => {
+    fetchCart()
+      .then(setCart)
+      .catch(() => showPopup("Não foi possível carregar o carrinho", "error"));
+  }, [token, fetchCart]);
+
+  const handleRemove = async (cartId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/cart/${cartId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error("Erro ao remover");
+      await removeFromCart(cartId);
       setCart((prev) => prev.filter((item) => item.cart_id !== cartId));
-      showPopup("Item removido do carrinho!", "success");
+      showPopup("Item removido com sucesso!", "success");
     } catch (err) {
-      showPopup("Erro ao remover item.", "error");
+      showPopup(error || "Erro ao remover item", "error");
     }
   };
 
-  const changeQuantity = async (cartId, currentQuantity, change) => {
+  const handleChangeQuantity = async (cartId, currentQuantity, change) => {
     const newQuantity = currentQuantity + change;
-    if (newQuantity <= 0) return removeFromCart(cartId);
+
+    if (newQuantity <= 0) {
+      await handleRemove(cartId);
+      return;
+    }
 
     try {
-      // Lógica simplificada (ajuste conforme seu backend real)
-      await fetch(`http://localhost:5000/api/cart/${cartId}`, {
-        method: "PATCH", // se seu backend suportar PATCH, senão use DELETE + POST
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ quantity: newQuantity }),
-      });
-      await fetchCart();
-      showPopup(change > 0 ? "Quantidade aumentada!" : "Quantidade diminuída!", "success");
+      // Encontra o item para pegar o product_id (ou id)
+      const item = cart.find((i) => i.cart_id === cartId);
+      if (!item?.id) {
+        showPopup("Erro interno: produto não identificado", "error");
+        return;
+      }
+
+      await removeFromCart(cartId);
+
+      await addToCart(item.id, newQuantity);
+
+      const updatedCart = await fetchCart();
+      setCart(updatedCart);
+
+      showPopup(
+        change > 0 ? "Quantidade aumentada!" : "Quantidade reduzida!",
+        "success"
+      );
     } catch (err) {
-      showPopup("Erro ao alterar quantidade.", "error");
+      console.error("Erro ao atualizar quantidade:", err);
+      showPopup("Não foi possível atualizar a quantidade", "error");
+      fetchCart().then(setCart);
     }
   };
 
   const getTotalPrice = () =>
-    cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    cart
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
 
-  useEffect(() => {
-    fetchCart();
-  }, [token]);
+  if (loading && cart.length === 0) {
+    return (
+      <div className="loading-container">
+        <p>Carregando seu carrinho...</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -82,8 +104,12 @@ export default function Cart({ token }) {
 
       <section className="shop" aria-labelledby="carrinho-heading">
         <div className="container">
-          <h2 id="carrinho-heading" className="shop-title">Meu Carrinho</h2>
+          <h2 id="carrinho-heading" className="shop-title">
+            Meu Carrinho
+          </h2>
           <p className="shop-subtitle">Seus produtos selecionados</p>
+
+          {error && <p className="error-global">{error}</p>}
 
           {cart.length === 0 ? (
             <div className="shop-nothing">
@@ -99,9 +125,10 @@ export default function Cart({ token }) {
                       src={`/images/products/${c.image}`}
                       alt={`Produto ${c.name} - ${c.description}`}
                       className="shop-image"
+                      onError={(e) => (e.target.src = "/images/placeholder.jpg")}
                     />
                     <div className="shop-content">
-                      <h3 className="shop-name">{c.name}</h3>
+                      <h4 className="shop-name">{c.name}</h4>
                       <p className="shop-description">{c.description}</p>
 
                       <div className="shop-quantity-section">
@@ -109,17 +136,26 @@ export default function Cart({ token }) {
                         <div className="shop-quantity-controls">
                           <button
                             className="shop-quantity-btn"
-                            onClick={() => changeQuantity(c.cart_id, c.quantity, -1)}
+                            onClick={() =>
+                              handleChangeQuantity(c.cart_id, c.quantity, -1)
+                            }
+                            disabled={loading}
                             aria-label="Diminuir quantidade"
                           >
                             <Minus size={16} aria-hidden="true" />
                           </button>
-                          <span className="shop-quantity-display" aria-live="polite">
+                          <span
+                            className="shop-quantity-display"
+                            aria-live="polite"
+                          >
                             {c.quantity}
                           </span>
                           <button
                             className="shop-quantity-btn"
-                            onClick={() => changeQuantity(c.cart_id, c.quantity, 1)}
+                            onClick={() =>
+                              handleChangeQuantity(c.cart_id, c.quantity, 1)
+                            }
+                            disabled={loading}
                             aria-label="Aumentar quantidade"
                           >
                             <Plus size={16} aria-hidden="true" />
@@ -127,12 +163,15 @@ export default function Cart({ token }) {
                         </div>
                       </div>
 
-                      <p className="shop-price">R$ {(c.price * c.quantity).toFixed(2)}</p>
+                      <p className="shop-price">
+                        R$ {(c.price * c.quantity).toFixed(2)}
+                      </p>
 
                       <div className="shop-buttons">
                         <button
-                          onClick={() => removeFromCart(c.cart_id)}
+                          onClick={() => handleRemove(c.cart_id)}
                           className="shop-btn shop-btn-remove"
+                          disabled={loading}
                           aria-label={`Remover ${c.name} do carrinho`}
                         >
                           <Trash2 size={16} aria-hidden="true" /> Remover
@@ -143,11 +182,12 @@ export default function Cart({ token }) {
                 ))}
               </div>
 
-              <div className="shop-total" role="region" aria-live="polite">
+              <div className="shop-total" role="region">
                 <h3 className="shop-total-title">Total do Pedido</h3>
-                <p className="shop-total-price">R$ {getTotalPrice()}</p>
+                <h3 className="shop-total-price">R$ {getTotalPrice()}</h3>
                 <button
                   className="shop-checkout-btn shop-btn"
+                  disabled={loading || cart.length === 0}
                   aria-label={`Finalizar compra no valor de R$ ${getTotalPrice()}`}
                 >
                   <ShoppingCart size={18} aria-hidden="true" /> Finalizar Compra

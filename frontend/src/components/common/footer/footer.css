@@ -4,6 +4,7 @@
 .footer {
   position: relative;
   background: var(--bg2);
+  color: var(--light-soft);
 }
 
 /* ===== Conteúdo ===== */
@@ -21,30 +22,26 @@ footer .container {
 /* ===== Seções ===== */
 .footer-section h3 {
   font-family: "Playfair Display", serif;
+  color: var(--light);
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-light);
   margin-bottom: 1.5rem;
   position: relative;
 }
 
 .footer-section h3::after {
+  background-color: var(--light-soft);
   content: "";
   position: absolute;
   bottom: -0.5rem;
   left: 0;
   width: 40px;
   height: 2px;
-  background: var(--text-light);
   border-radius: 1px;
 }
 
-.footer-section p {
-  color: var(--text-mid-light);
-}
-
 .footer-section a {
-  color: var(--text-mid-light);
+  color: var(--light-soft);
   font-size: 0.9rem;
   line-height: 1.6;
   width: fit-content;
@@ -57,7 +54,7 @@ footer .container {
 }
 
 .footer-section a:hover {
-  color: var(--text-light);
+  color: var(--light);
   transform: translateX(4px);
 }
 
@@ -75,7 +72,6 @@ footer .container {
   justify-content: center;
   width: 34px;
   height: 34px;
-  color: rgba(245, 222, 179, 0.9);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   text-decoration: none;
 }
@@ -89,12 +85,10 @@ footer .container {
 .footer-bottom {
   text-align: center;
   padding: 2rem 0;
-  border-top: 1px solid rgba(245, 222, 179, 0.2);
   background: rgba(0, 0, 0, 0.1);
 }
 
 .footer-copyright {
-  color: var(--text-mid-light);
   font-size: 0.85rem;
   letter-spacing: 0.5px;
   font-weight: 400;
@@ -102,7 +96,6 @@ footer .container {
 }
 
 .footer-brand {
-  color: var(--text-light);
   font-weight: 600;
   font-family: "Playfair Display", serif;
   letter-spacing: -0.2px;

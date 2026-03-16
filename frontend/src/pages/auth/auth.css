@@ -4,6 +4,7 @@
 .auth-section {
   min-height: 100dvh;
   background: var(--bg2);
+  color: var(--light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,8 +31,7 @@
 }
 
 .auth-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
+  background: var(--light);
   border-radius: 24px;
   padding: 3.5rem 3rem;
   box-shadow: var(--shadow-soft);
@@ -47,7 +47,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 50%, var(--primary-light) 100%);
+  background: var(--light-soft);
   border-radius: 24px 24px 0 0;
 }
 
@@ -76,7 +76,7 @@
   font-weight: 400;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--mid-light);
   margin: 0;
 }
 
@@ -94,42 +94,45 @@
 .auth-input {
   width: 100%;
   padding: 1.25rem 1.5rem;
-  border: 2px solid rgba(160, 81, 45, 0.15);
+  border: 1px solid var(--light-soft);
   border-radius: 16px;
   font-size: 1rem;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  color: var(--primary);
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   outline: none;
   box-sizing: border-box;
+  color: var(--dark)
 }
 
 .auth-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(160, 81, 45, 0.1), 0 8px 24px rgba(160, 81, 45, 0.1);
-  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .auth-input::placeholder {
-  color: rgba(160, 81, 45, 0.5);
+  color: var(--mid-light);
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
 
 /* ===== Botão ===== */
+.error-message{
+  display: flex;
+  justify-content: center;
+  color: var(--dark);
+}
+
 .auth-button {
   width: 100%;
   padding: 1.25rem 2rem;
   background: var(--bg2);
-  color: var(--text-light);
+  color: var(--light);
   border: none;
   border-radius: 16px;
   font-size: 1rem;
   font-weight: 600;
   font-family: 'Inter', sans-serif;
-  text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
@@ -140,7 +143,7 @@
 
 .auth-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(160, 81, 45, 0.3), 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .auth-button:active {
@@ -152,11 +155,11 @@
   text-align: center;
   margin-top: 2.5rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(160, 81, 45, 0.15);
+  border-top: 1px solid var(--light-soft);
 }
 
 .auth-footer p {
-  color: var(--primary-dark);
+  color: var(--dark);
   font-size: 0.95rem;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -164,7 +167,7 @@
 }
 
 .auth-link {
-  color: var(--primary);
+  color:  var(--dark);
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
@@ -179,13 +182,13 @@
   height: 2px;
   bottom: -2px;
   left: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  background: var(--accent);
   transition: width 0.3s ease;
   transform: translateX(-50%);
 }
 
 .auth-link:hover {
-  color: var(--primary-light);
+  color: var(--accent);
 }
 
 .auth-link:hover::after {

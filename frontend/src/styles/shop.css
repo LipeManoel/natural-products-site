@@ -6,7 +6,8 @@
 }
 
 .shop {
-  background: var(--bg1);
+  background: var(--bg);
+  color: var(--dark);
 }
 
 .shop-nothing {
@@ -25,7 +26,7 @@
 .nothing-icon{
   position: absolute;
   z-index: 1;
-  color: var(--text-mid-light);
+  color: var(--light-soft);
   font-size: min(320px, 24vw);
 }
 
@@ -34,6 +35,7 @@
   text-align: center;
   margin-bottom: 0.5rem;
   position: relative;
+  color: var(--accent);
 }
 
 .shop-title::after {
@@ -43,7 +45,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 60px;
-  height: 2px;
+  height: 3px;
   background: var(--accent);
   border-radius: 1px;
 }
@@ -51,6 +53,7 @@
 .shop-subtitle {
   text-align: center;
   margin-bottom: 3rem;
+  color: var(--accent);
 }
 
 /* ====================== GRID ====================== */
@@ -64,21 +67,17 @@
 
 /* ====================== CARD ====================== */
 .shop-card {
-  background: var(--bg-card);
-  border: 1px solid rgba(160, 82, 45, 0.2);
   border-radius: 20px;
   overflow: hidden;
   position: relative;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(160, 82, 45, 0.1);
-  
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.1);
 }
 
 .shop-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(160, 82, 45, 0.2);
-  border-color: rgba(160, 82, 45, 0.4);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.2);
+  border-color: var(--light-soft);
 }
 
 .shop-image {
@@ -96,6 +95,7 @@
 
 .shop-content {
   padding: 2rem 1.5rem;
+  text-align: center;
 }
 
 .shop-name {
@@ -110,9 +110,11 @@
 }
 
 .shop-price {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: var(--default-font-heading);
+  font-size: 2rem;
+  font-weight: 900;
   margin-bottom: 2rem;
+  color: var(--accent);
 }
 
 /* ====================== BOTÕES ====================== */
@@ -123,54 +125,44 @@
 }
 
 .shop-btn {
-  flex: 1;
   min-width: 120px;
   padding: 1rem 1.5rem;
+
   border: none;
   border-radius: 25px;
+
   font-size: 0.9rem;
   font-weight: 600;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
+
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
+
   gap: 0.5rem;
-  letter-spacing: 0.5px;
+  
+  color: var(--mid-light);
+  background: none;
 }
 
-.shop-btn-favorite {
-  background: linear-gradient(135deg, #ecc134 0%, #d4ac0d 100%);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.shop-btn-favorite:hover {
-  background: linear-gradient(135deg, #d4ac0d 0%, #b7950b 100%);
-  transform: translateY(-2px);
-}
-
-.shop-btn-cart {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.shop-btn-cart:hover {
-  background: linear-gradient(135deg, var(--primary-dark), #654321);
-  transform: translateY(-2px);
+.shop-btn:hover {
+  color: var(--dark);
+  background-color: var(--light-soft);
 }
 
 .shop-btn-remove {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--light);
+  background: var(--accent);
 }
 
 .shop-btn-remove:hover {
-  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
-  transform: translateY(-2px);
+  color: var(--light);
+  background: var(--accent-hover);
 }
 
 /* ====================== INDICADORES ====================== */
@@ -179,11 +171,10 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: linear-gradient(135deg, #ecc134 0%, #d4ac0d 100%);
-  color: #fff;
+  background: var(--light);
+  color: var(--dark);
   padding: 0.6rem 0.7rem;
   border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(236, 193, 52, 0.4);
   backdrop-filter: blur(10px);
   z-index: 10;
   display: flex;
@@ -198,15 +189,12 @@
   justify-content: space-between;
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: rgba(255,255,255,0.6);
-  border: 1px solid rgba(160,82,45,0.15);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--light-soft);
+  border-bottom: 1px solid var(--light-soft);
 }
 
 .shop-quantity-label {
   font-weight: 500;
-  color: var(--primary);
   font-size: 0.95rem;
 }
 
@@ -219,9 +207,8 @@
 .shop-quantity-btn {
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(160,82,45,0.3);
-  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,248,220,0.8));
-  color: var(--primary);
+  border: none;
+  background: var(--light-soft);
   border-radius: 50%;
   font-size: 1.1rem;
   font-weight: 600;
@@ -233,30 +220,22 @@
 }
 
 .shop-quantity-btn:hover {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #fff;
   transform: scale(1.1);
 }
 
 .shop-quantity-display {
   font-weight: 700;
-  color: var(--primary);
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   min-width: 28px;
   text-align: center;
   padding: 0.5rem;
-  background: rgba(255,255,255,0.8);
-  border-radius: 10px;
-  border: 1px solid rgba(160,82,45,0.2);
 }
 
 /* ====================== TOTAL (Carrinho) ====================== */
 .shop-total {
-  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,248,220,0.9) 100%);
-  border: 1px solid rgba(160,82,45,0.2);
+  border: 1px solid var(--light-soft);
   border-radius: 25px;
   padding: 3rem 2rem;
-  box-shadow: 0 15px 40px rgba(160,82,45,0.15);
   text-align: center;
   margin-top: 3rem;
   backdrop-filter: blur(15px);
@@ -265,40 +244,33 @@
 .shop-total-title {
   font-size: 1.75rem;
   font-weight: 600;
-  color: var(--primary);
-  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-soft);
   letter-spacing: -0.3px;
 }
 
 .shop-total-price {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--primary);
   margin-bottom: 2rem;
 }
 
 .shop-checkout-btn {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #fff;
+  color: var(--mid-light);
+  background: none;
+
   padding: 1.25rem 2.5rem;
   border: none;
   border-radius: 25px;
+  gap: 0.75rem;
+  margin: 0 auto;
+
   font-size: 1.1rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin: 0 auto;
+  
   transition: all 0.3s;
-}
-
-.shop-checkout-btn:hover {
-  background: linear-gradient(135deg, var(--primary-dark), #654321);
-  transform: translateY(-3px);
 }
 
 /* ====================== RESPONSIVO ====================== */

@@ -10,19 +10,18 @@
 }
 
 .header-background {
-  background: var(--bg2);
-  color: var(--text-light);
+  border-bottom: 1px solid var(--light-soft);
+  background: var(--bg1);
   backdrop-filter: blur(10px);
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .header-background.scrolled {
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   padding: 16px 32px;
 }
 
 .header-background:not(.scrolled) {
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
   padding: 24px 32px;
 }
 
@@ -45,10 +44,8 @@ header .container {
 .logo-container {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: var(--overlay);
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.32));
   padding: 6px;
   backdrop-filter: blur(10px);
 }
@@ -69,7 +66,7 @@ header .container {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
   letter-spacing: -0.5px;
-  background: var(--text-light);
+  background: var(--dark);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -79,7 +76,7 @@ header .container {
 }
 
 .header-title.scrolled {
-  font-size: 28px;
+  font-size: 30px;
 }
 
 .header-title:not(.scrolled) {
@@ -87,21 +84,19 @@ header .container {
 }
 
 .header-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(245, 222, 179, 0.9);
-  margin: 0;
+  color: var(--accent);
+  margin-top: 8px;
   transition: all 0.3s ease;
 }
 
 .header-subtitle.scrolled {
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .header-subtitle:not(.scrolled) {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* ===== Navegação Desktop ===== */
@@ -113,7 +108,7 @@ header .container {
 
 .header-nav-item {
   font-family: 'Inter', sans-serif;
-  color: var(--text-light-soft);
+  color: var(--accent);
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
@@ -123,16 +118,11 @@ header .container {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-overlay);
-  border: 1px solid var(--border-light);
 }
 
 .header-nav-item:hover {
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border-color: rgba(245, 222, 179, 0.4);
-  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+  color: var(--accent-hover)
 }
 
 .nav-icon {
@@ -143,8 +133,8 @@ header .container {
 /* ===== Menu Mobile ===== */
 .mobile-menu-toggle {
   display: none;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(245, 222, 179, 0.3);
+  background: var(--border-light-shadow);
+  border: 1px solid var(--border-light);
   color: var(--text-light-soft);
   font-size: 20px;
   cursor: pointer;
@@ -239,9 +229,4 @@ header .container {
   .header-container {
     padding: 0 16px;
   }
-}
-
-/* ===== Scroll padding para seções ===== */
-section {
-  scroll-margin-top: 120px;
 }
