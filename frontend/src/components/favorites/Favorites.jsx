@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Heart, ShoppingCart, Trash2, Loader2 } from "lucide-react";
 import { CgSearchLoading } from "react-icons/cg";
-import { useShopActions } from "@/hooks/useShopActions"; // ← agora usamos o hook unificado
+import { useShopActions } from "@/hooks/useShopActions";
 
 import "@/styles/shop.css";
 
@@ -56,16 +56,20 @@ export default function Favorites({ token }) {
 
   if (loading && favorites.length === 0) {
     return (
-      <div
-        className="shop-container"
-        style={{ textAlign: "center", padding: "4rem 2rem" }}
-      >
-        <Loader2
-          size={48}
-          style={{ animation: "spin 2s linear infinite", marginBottom: "1rem" }}
-        />
-        <p>Carregando seus favoritos...</p>
-      </div>
+      <>
+        <section className="shop">
+          <div className="container">
+            <Loader2
+              size={48}
+              style={{
+                animation: "spin 2s linear infinite",
+                marginBottom: "1rem",
+              }}
+            />
+            <p>Carregando seus favoritos...</p>
+          </div>
+        </section>
+      </>
     );
   }
 
@@ -96,7 +100,6 @@ export default function Favorites({ token }) {
             <div className="shop-grid">
               {favorites.map((f) => (
                 <div key={f.fav_id} className="shop-card">
-
                   <img
                     src={`/images/products/${f.image}`}
                     alt={f.name}

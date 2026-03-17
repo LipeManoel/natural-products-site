@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Trash2, Plus, Minus, ShoppingCart } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingCart, Loader2 } from "lucide-react";
 import { CgSearchLoading } from "react-icons/cg";
 import { useShopActions } from "@/hooks/useShopActions";
 
@@ -79,9 +79,18 @@ export default function Cart({ token }) {
 
   if (loading && cart.length === 0) {
     return (
-      <div className="loading-container">
-        <p>Carregando seu carrinho...</p>
+      <section className="shop">
+          <div className="container">
+     <Loader2
+              size={48}
+              style={{
+                animation: "spin 2s linear infinite",
+                marginBottom: "1rem",
+              }}
+            />
+            <p>Carregando seus favoritos...</p>
       </div>
+      </section>
     );
   }
 
