@@ -18,11 +18,11 @@
 
 .header-background.scrolled {
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
-  padding: 16px 32px;
+  padding: 0.5rem 1rem;
 }
 
 .header-background:not(.scrolled) {
-  padding: 24px 32px;
+  padding: 1rem 1rem;
 }
 
 /* ===== Container ===== */
@@ -44,10 +44,8 @@ header .container {
 .logo-container {
   position: relative;
   display: flex;
-  background-color: var(--overlay);
   border-radius: 50%;
   padding: 6px;
-  backdrop-filter: blur(10px);
 }
 
 .logo {
@@ -63,40 +61,9 @@ header .container {
 }
 
 .header-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  background: var(--dark);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--dark);
   margin: 0;
-  line-height: 1;
   transition: all 0.3s ease;
-}
-
-.header-title.scrolled {
-  font-size: 30px;
-}
-
-.header-title:not(.scrolled) {
-  font-size: 32px;
-}
-
-.header-subtitle {
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-top: 8px;
-  transition: all 0.3s ease;
-}
-
-.header-subtitle.scrolled {
-  font-size: 15px;
-}
-
-.header-subtitle:not(.scrolled) {
-  font-size: 16px;
 }
 
 /* ===== Navegação Desktop ===== */
@@ -107,22 +74,27 @@ header .container {
 }
 
 .header-nav-item {
-  font-family: 'Inter', sans-serif;
-  color: var(--accent);
+  width: fit-content;
+
+  color: var(--mid-light);
   text-decoration: none;
-  font-size: 15px;
+  font-size: 0.9rem;
   font-weight: 500;
-  padding: 12px 20px;
-  border-radius: 25px;
+
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
+.nav-container{
+  padding: 12px 20px;
+}
+
 .header-nav-item:hover {
   transform: translateY(-4px);
-  color: var(--accent-hover)
+  color: var(--accent);
 }
 
 .nav-icon {

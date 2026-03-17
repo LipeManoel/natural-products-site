@@ -4,13 +4,13 @@ import Register from "@/pages/auth/Register";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import AccessibilityToolbar from "@/components/common/accessibility-toolbar/AccessibilityToolbar";
 
-import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation"; // novo
+import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation";
 
 export default function App() {
   const [token, setToken] = useState(null);
   const [page, setPage] = useState("login");
 
-  useKeyboardNavigation(); // ativa atalhos em todo o app
+  useKeyboardNavigation();
 
   const logout = () => {
     setToken(null);

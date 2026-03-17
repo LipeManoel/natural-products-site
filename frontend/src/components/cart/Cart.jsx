@@ -9,15 +9,10 @@ export default function Cart({ token }) {
   const [cart, setCart] = useState([]);
   const [popup, setPopup] = useState({ text: "", type: "", visible: false });
 
-  const {
-    fetchCart,
-    removeFromCart,
-    addToCart,
-    loading,
-    error,
-  } = useShopActions(token);
+  const { fetchCart, removeFromCart, addToCart, loading, error } =
+    useShopActions(token);
 
-   const showPopup = (text, type) => {
+  const showPopup = (text, type) => {
     setPopup({ text, type, visible: true });
     setTimeout(() => setPopup((prev) => ({ ...prev, visible: false })), 3000);
   };
@@ -68,7 +63,7 @@ export default function Cart({ token }) {
 
       showPopup(
         change > 0 ? "Quantidade aumentada!" : "Quantidade reduzida!",
-        "success"
+        "success",
       );
     } catch (err) {
       console.error("Erro ao atualizar quantidade:", err);
@@ -104,10 +99,11 @@ export default function Cart({ token }) {
 
       <section className="shop" aria-labelledby="carrinho-heading">
         <div className="container">
-          <h2 id="carrinho-heading" className="shop-title">
-            Meu Carrinho
-          </h2>
+
+        <div className="txt-shop-header">
+          <h2 className="shop-title">Meu Carrinho</h2>
           <p className="shop-subtitle">Seus produtos selecionados</p>
+        </div>
 
           {error && <p className="error-global">{error}</p>}
 
@@ -124,12 +120,14 @@ export default function Cart({ token }) {
                     <img
                       src={`/images/products/${c.image}`}
                       alt={`Produto ${c.name} - ${c.description}`}
-                      className="shop-image"
-                      onError={(e) => (e.target.src = "/images/placeholder.jpg")}
+                      className="product-image"
+                      onError={(e) =>
+                        (e.target.src = "/images/placeholder.jpg")
+                      }
                     />
-                    <div className="shop-content">
-                      <h4 className="shop-name">{c.name}</h4>
-                      <p className="shop-description">{c.description}</p>
+                    <div className="product-details">
+                      <h4 className="product-name">{c.name}</h4>
+                      <p className="product-description">{c.description}</p>
 
                       <div className="shop-quantity-section">
                         <span className="shop-quantity-label">Quantidade:</span>
@@ -163,14 +161,14 @@ export default function Cart({ token }) {
                         </div>
                       </div>
 
-                      <p className="shop-price">
-                        R$ {(c.price * c.quantity).toFixed(2)}
-                      </p>
+                      <div className="product-footer">
+                        <span className="product-price">
+                          R$ {(c.price * c.quantity).toFixed(2)}
+                        </span>
 
-                      <div className="shop-buttons">
                         <button
                           onClick={() => handleRemove(c.cart_id)}
-                          className="shop-btn shop-btn-remove"
+                          className="btn btn-remove"
                           disabled={loading}
                           aria-label={`Remover ${c.name} do carrinho`}
                         >

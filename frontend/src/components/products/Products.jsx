@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
 import { useShopActions } from "@/hooks/useShopActions";
 
@@ -13,43 +13,84 @@ export default function Products({ token }) {
     fetchProducts,
     fetchFavorites,
     addToFavorites,
+    removeFavorite,
     addToCart,
     loading,
-    error,
   } = useShopActions(token);
 
-   const showPopup = (text, type) => {
+  const showPopup = (text, type) => {
     setPopup({ text, type, visible: true });
-    setTimeout(() => setPopup((prev) => ({ ...prev, visible: false })), 3000);
+    setTimeout(() => {
+      setPopup((prev) => ({ ...prev, visible: false }));
+    }, 3000);
   };
 
-  // Carregar produtos (público)
+  const isProductFavorited = useCallback(
+    (productId) => {
+      return favorites.some(
+        (f) => f.product_id === productId || f.product?.id === productId,
+      );
+    },
+    [favorites],
+  );
+
+  // Carregar produtos
   useEffect(() => {
-    fetchProducts()
-      .then(setProducts)
-      .catch(() => showPopup("Não foi possível carregar os produtos", "error"));
+    fetchProducts().then(setProducts).catch(console.error);
   }, [fetchProducts]);
 
-  // Carregar favoritos (só se logado)
-  useEffect(() => {
-    if (!token) return;
-    fetchFavorites()
-      .then(setFavorites)
-      .catch(() => showPopup("Erro ao carregar favoritos", "error"));
+  // Carregar favoritos
+  const loadFavorites = useCallback(async () => {
+    if (!token) {
+      setFavorites([]);
+      return;
+    }
+
+    try {
+      const data = await fetchFavorites();
+      setFavorites(data || []);
+    } catch (err) {
+      console.error(err);
+    }
   }, [token, fetchFavorites]);
 
-  const handleAddToFavorites = async (productId) => {
+  useEffect(() => {
+    loadFavorites();
+  }, [loadFavorites]);
+
+  const handleToggleFavorite = async (productId) => {
     if (!token) {
       showPopup("Você precisa estar logado!", "error");
       return;
     }
 
+    const isCurrentlyFavorited = isProductFavorited(productId);
+
     try {
-      await addToFavorites(productId);
-      setFavorites((prev) => [...prev, { product_id: productId }]);
-      showPopup("Produto adicionado aos favoritos!", "success");
+      if (isCurrentlyFavorited) {
+        const favToRemove = favorites.find(
+          (f) => f.product_id === productId || f.product?.id === productId,
+        );
+
+        const favoriteId = favToRemove?.fav_id || favToRemove?.id;
+
+        if (!favoriteId) {
+          throw new Error("ID do favorito não encontrado para remoção.");
+        }
+
+        await removeFavorite(favoriteId);
+        await loadFavorites();
+
+        showPopup("Removido dos favoritos", "success");
+      } else {
+        await addToFavorites(productId);
+        await loadFavorites();
+
+        showPopup("Adicionado aos favoritos!", "success");
+      }
     } catch (err) {
-      showPopup(error || "Erro ao adicionar aos favoritos", "error");
+      console.error(err);
+      showPopup("Erro ao atualizar favoritos", "error");
     }
   };
 
@@ -61,81 +102,70 @@ export default function Products({ token }) {
 
     try {
       await addToCart(productId);
-      showPopup("Produto adicionado ao carrinho!", "success");
+      showPopup("Adicionado ao carrinho!", "success");
     } catch (err) {
-      showPopup(error || "Erro ao adicionar ao carrinho", "error");
+      console.error(err);
+      showPopup("Erro ao adicionar ao carrinho", "error");
     }
   };
 
-  if (loading && products.length === 0) {
-    return (
-      <div className="loading-container">
-        <p>Carregando produtos...</p>
-      </div>
-    );
-  }
-
   return (
     <>
-      {/* Pop-up */}
       {popup.visible && (
-        <div className={`popup ${popup.type} ${popup.visible ? "visible" : ""}`}>
+        <div
+          className={`popup ${popup.type} ${popup.visible ? "visible" : ""}`}
+        >
           <span className="popup-text">{popup.text}</span>
         </div>
       )}
 
-      {error && <div className="global-error">Erro: {error}</div>}
-
       <section className="shop">
         <div className="container">
-          <h2 className="shop-title">Produtos</h2>
-          <p className="shop-subtitle">Descubra nossos produtos naturais</p>
+          <div className="txt-shop-header">
+            <h2 className="shop-title">Produtos</h2>
+            <p className="shop-subtitle">Descubra nossos produtos naturais</p>
+          </div>
 
           <div className="shop-grid">
             {products.map((p) => {
-              const isFavorited = favorites.some(
-                (f) => f.product_id === p.id || f.id === p.id
-              );
+              const isFavorited = isProductFavorited(p.id);
 
               return (
-                <div key={p.id} className="shop-card">
-                  {isFavorited && (
-                    <div className="favorited-indicator">
-                      <Heart size={20} fill="currentColor" />
-                    </div>
-                  )}
+                <div
+                  key={p.id}
+                  className="shop-card"
+                  style={{ position: "relative" }}
+                >
+                  <button
+                    onClick={() => handleToggleFavorite(p.id)}
+                    className={`btn fixed btn-favorite ${isFavorited ? "active" : ""}`}
+                    disabled={loading}
+                  >
+                    <span className="btn-icon-container">
+                      <Heart fill={isFavorited ? "currentColor" : "none"} />
+                    </span>
+                  </button>
 
                   <img
                     src={`/images/products/${p.image}`}
                     alt={p.name}
-                    className="shop-image"
-                    onError={(e) => (e.target.src = "/images/placeholder.jpg")}
+                    className="product-image"
                   />
 
-                  <div className="shop-content">
-                    <h4 className="shop-name">{p.name}</h4>
-                    <p className="shop-description">{p.description}</p>
-                    <p className="shop-price">
-                      R$ {Number(p.price).toFixed(2)}
-                    </p>
+                  <div className="product-details">
+                    <h4 className="product-name">{p.name}</h4>
+                    <p className="product-description">{p.description}</p>
 
-                    <div className="shop-buttons">
-                      {!isFavorited && (
-                        <button
-                          onClick={() => handleAddToFavorites(p.id)}
-                          className="shop-btn"
-                          disabled={loading}
-                        >
-                          <Heart size={16} /> Favorito
-                        </button>
-                      )}
+                    <div className="product-footer">
+                      <span className="product-price">
+                        R$ {Number(p.price).toFixed(2)}
+                      </span>
 
                       <button
                         onClick={() => handleAddToCart(p.id)}
-                        className="shop-btn"
-                        disabled={loading}
+                        className="btn"
                       >
-                        <ShoppingCart size={16} /> Carrinho
+                        <ShoppingCart /> Carrinho
                       </button>
                     </div>
                   </div>

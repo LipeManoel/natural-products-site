@@ -9,15 +9,10 @@ export default function Favorites({ token }) {
   const [favorites, setFavorites] = useState([]);
   const [popup, setPopup] = useState({ text: "", type: "", visible: false });
 
-  const {
-    fetchFavorites,
-    removeFavorite,
-    addToCart,
-    loading,
-    error,
-  } = useShopActions(token);
+  const { fetchFavorites, removeFavorite, addToCart, loading, error } =
+    useShopActions(token);
 
-   const showPopup = (text, type) => {
+  const showPopup = (text, type) => {
     setPopup({ text, type, visible: true });
     setTimeout(() => setPopup((prev) => ({ ...prev, visible: false })), 3000);
   };
@@ -61,7 +56,10 @@ export default function Favorites({ token }) {
 
   if (loading && favorites.length === 0) {
     return (
-      <div className="shop-container" style={{ textAlign: "center", padding: "4rem 2rem" }}>
+      <div
+        className="shop-container"
+        style={{ textAlign: "center", padding: "4rem 2rem" }}
+      >
         <Loader2
           size={48}
           style={{ animation: "spin 2s linear infinite", marginBottom: "1rem" }}
@@ -84,8 +82,10 @@ export default function Favorites({ token }) {
 
       <section className="shop">
         <div className="container">
-          <h2 className="shop-title">Meus Favoritos</h2>
-          <p className="shop-subtitle">Produtos que você adorou</p>
+          <div className="txt-shop-header">
+            <h2 className="shop-title">Meus Favoritos</h2>
+            <p className="shop-subtitle">Produtos que você adorou</p>
+          </div>
 
           {favorites.length === 0 ? (
             <div className="shop-nothing">
@@ -96,36 +96,35 @@ export default function Favorites({ token }) {
             <div className="shop-grid">
               {favorites.map((f) => (
                 <div key={f.fav_id} className="shop-card">
-                  <div className="favorite-indicator">
-                    <Heart size={14} fill="currentColor" />
-                  </div>
 
                   <img
                     src={`/images/products/${f.image}`}
                     alt={f.name}
-                    className="shop-image"
-                    onError={(e) => { e.target.src = '/images/placeholder.jpg'; }}
+                    className="product-image"
+                    onError={(e) => {
+                      e.target.src = "/images/placeholder.jpg";
+                    }}
                   />
 
-                  <div className="shop-content">
-                    <h4 className="shop-name">{f.name}</h4>
-                    <p className="shop-description">{f.description}</p>
+                  <div className="product-details">
+                    <h4 className="product-name">{f.name}</h4>
+                    <p className="product-description">{f.description}</p>
 
-                    <div className="shop-buttons">
+                    <div className="product-footer">
                       <button
                         onClick={() => handleAddToCart(f.product_id || f.id)}
-                        className="shop-btn shop-btn-cart"
+                        className="btn"
                         disabled={loading}
                       >
-                        <ShoppingCart size={16} /> Carrinho
+                        <ShoppingCart /> Carrinho
                       </button>
 
                       <button
                         onClick={() => handleRemove(f.fav_id)}
-                        className="shop-btn shop-btn-remove"
+                        className="btn btn-remove"
                         disabled={loading}
                       >
-                        <Trash2 size={16} /> Remover
+                        <Trash2 /> Remover
                       </button>
                     </div>
                   </div>

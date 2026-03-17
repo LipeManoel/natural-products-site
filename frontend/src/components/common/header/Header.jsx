@@ -18,7 +18,7 @@ export default function Header({ onNavigation, logout }) {
   }, []);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
   const handleNavClick = (section, event) => {
@@ -30,18 +30,7 @@ export default function Header({ onNavigation, logout }) {
       return;
     }
 
-    if (onNavigation) {
-      onNavigation(section);
-    }
-
-    const target = document.querySelector(section);
-    if (target) {
-      const headerOffset = 120;
-      const elementPosition =
-        target.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-    }
+    onNavigation?.(section);
   };
 
   return (
@@ -50,56 +39,68 @@ export default function Header({ onNavigation, logout }) {
         <div className="container">
           <div
             className="header-brand"
-            onClick={() => onNavigation && onNavigation("#produtos")}
+            onClick={() => onNavigation?.("#produtos")}
           >
             <div className="logo-container">
               <img src="/images/logo.png" alt="Natura Pura" className="logo" />
             </div>
             <div className="brand-text">
-              <h1 className={`header-title ${isScrolled ? "scrolled" : ""}`}>
+              <h3 className={`header-title ${isScrolled ? "scrolled" : ""}`}>
                 Natura Pura
-              </h1>
-              <h2 className={`header-subtitle ${isScrolled ? "scrolled" : ""}`}>
-                100% Natural
-              </h2>
+              </h3>
             </div>
           </div>
 
           <nav className="header-nav">
-            <a
-              href="#produtos"
-              className="header-nav-item"
-              onClick={(e) => handleNavClick("#produtos", e)}
-            >
-              Início
-            </a>
-            <a
-              href="#salvos"
-              className="header-nav-item"
-              onClick={(e) => handleNavClick("#salvos", e)}
-            >
-              <Heart className="nav-icon" />
-              Favoritos
-            </a>
-            <a
-              href="#carrinho"
-              className="header-nav-item"
-              onClick={(e) => handleNavClick("#carrinho", e)}
-            >
-              <ShoppingCart className="nav-icon" />
-              Carrinho
-            </a>
-            <a
-              href="#sair"
-              className="header-nav-item"
-              onClick={(e) => handleNavClick("#sair", e)}
-            >
-              <LogOut className="nav-icon" />
-              Sair
-            </a>
+            <span className="nav-container">
+              <a
+                href="#produtos"
+                className="header-nav-item"
+                onClick={(e) => handleNavClick("#produtos", e)}
+              >
+                Início
+              </a>
+            </span>
+
+            <span className="nav-container">
+              <a
+                href="#salvos"
+                className="header-nav-item"
+                onClick={(e) => handleNavClick("#salvos", e)}
+              >
+                <Heart className="nav-icon" />
+                Favoritos
+              </a>
+            </span>
+
+            <span className="nav-container">
+              <a
+                href="#carrinho"
+                className="header-nav-item"
+                onClick={(e) => handleNavClick("#carrinho", e)}
+              >
+                <ShoppingCart className="nav-icon" />
+                Carrinho
+              </a>
+            </span>
+
+            <span className="nav-container">
+              <a
+                href="#sair"
+                className="header-nav-item"
+                onClick={(e) => handleNavClick("#sair", e)}
+              >
+                <LogOut className="nav-icon" />
+                Sair
+              </a>
+            </span>
           </nav>
 
-          <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+          <button
+            type="button"
+            className="mobile-menu-toggle"
+            onClick={toggleMobileMenu}
+          >
             {isMobileMenuOpen ? "✕" : "☰"}
           </button>
         </div>
@@ -112,6 +113,7 @@ export default function Header({ onNavigation, logout }) {
           >
             Início
           </a>
+
           <a
             href="#salvos"
             className="mobile-nav-item"
@@ -120,6 +122,7 @@ export default function Header({ onNavigation, logout }) {
             <Heart className="nav-icon" />
             Favoritos
           </a>
+
           <a
             href="#carrinho"
             className="mobile-nav-item"
@@ -128,6 +131,7 @@ export default function Header({ onNavigation, logout }) {
             <ShoppingCart className="nav-icon" />
             Carrinho
           </a>
+
           <a
             href="#sair"
             className="mobile-nav-item"
