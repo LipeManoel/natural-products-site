@@ -2,18 +2,23 @@ import { useEffect, useState } from "react";
 import { Trash2, Plus, Minus, ShoppingCart, Loader2 } from "lucide-react";
 import { CgSearchLoading } from "react-icons/cg";
 import { useShopActions } from "@/hooks/useShopActions";
+import { emitSoundEvent } from "@/utils/soundAlertBus";
+import { useAnnouncer } from "@/hooks/useAnnouncer";
 
 import "@/styles/shop.css";
 
 export default function Cart({ token }) {
   const [cart, setCart] = useState([]);
   const [popup, setPopup] = useState({ text: "", type: "", visible: false });
+  const { announce } = useAnnouncer();
 
   const { fetchCart, removeFromCart, addToCart, loading, error } =
     useShopActions(token);
 
   const showPopup = (text, type) => {
     setPopup({ text, type, visible: true });
+    emitSoundEvent(type === "error" ? "error" : "success", text);
+    announce(text);
     setTimeout(() => setPopup((prev) => ({ ...prev, visible: false })), 3000);
   };
 

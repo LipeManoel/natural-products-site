@@ -12,7 +12,7 @@ app.use(cors());
 const db = await mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "151515",
+  password: "root",
   database: "natural_products_db"
 });
 

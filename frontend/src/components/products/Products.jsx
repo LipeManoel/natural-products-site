@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import { Heart, ShoppingCart } from "lucide-react";
 import { useShopActions } from "@/hooks/useShopActions";
+import { emitSoundEvent } from "@/utils/soundAlertBus";
+import { useAnnouncer } from "@/hooks/useAnnouncer";
 
 import "@/styles/shop.css";
 
@@ -8,6 +10,7 @@ export default function Products({ token }) {
   const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [popup, setPopup] = useState({ text: "", type: "", visible: false });
+  const { announce } = useAnnouncer();
 
   const {
     fetchProducts,
@@ -20,6 +23,10 @@ export default function Products({ token }) {
 
   const showPopup = (text, type) => {
     setPopup({ text, type, visible: true });
+    // Alerta visual (flash + banner) para usuários surdos/def. auditivos,
+    // e anúncio para leitores de tela — em paralelo ao popup visual normal.
+    emitSoundEvent(type === "error" ? "error" : "success", text);
+    announce(text);
     setTimeout(() => {
       setPopup((prev) => ({ ...prev, visible: false }));
     }, 3000);
